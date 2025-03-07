@@ -1,0 +1,97 @@
+-- Create the UI
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "FloodEscapeClassicUI"
+ScreenGui.ResetOnSpawn = false -- Prevent UI from resetting on respawn
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(0, 300, 0, 150)
+Frame.Position = UDim2.new(0.5, -150, 0.5, -150)
+Frame.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+Frame.Active = true
+Frame.Draggable = true
+Frame.Parent = ScreenGui
+
+-- Add UICorner to Frame
+local FrameCorner = Instance.new("UICorner")
+FrameCorner.CornerRadius = UDim.new(0, 15)
+FrameCorner.Parent = Frame
+
+-- Add UIGradient to Frame
+local FrameGradient = Instance.new("UIGradient")
+FrameGradient.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(75, 0, 130)), -- Purple
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))    -- Black
+}
+FrameGradient.Parent = Frame
+
+-- Title Bar
+local TitleBar = Instance.new("TextLabel")
+TitleBar.Size = UDim2.new(1, 0, 0, 30)
+TitleBar.BackgroundTransparency = 1
+TitleBar.Text = "Tayto's FEC Menu"
+TitleBar.TextColor3 = Color3.new(1, 1, 1)
+TitleBar.Font = Enum.Font.GothamBold
+TitleBar.TextSize = 16
+TitleBar.Parent = Frame
+
+-- Close Button
+local CloseButton = Instance.new("TextButton")
+CloseButton.Size = UDim2.new(0, 30, 0, 30)
+CloseButton.Position = UDim2.new(1, -30, 0, 0)
+CloseButton.Text = "X"
+CloseButton.TextColor3 = Color3.new(1, 1, 1)
+CloseButton.Font = Enum.Font.GothamBold
+CloseButton.BackgroundColor3 = Color3.new(0.8, 0, 0)
+CloseButton.Parent = Frame
+
+-- Add UICorner to Close Button
+local CloseButtonCorner = Instance.new("UICorner")
+CloseButtonCorner.CornerRadius = UDim.new(0, 10)
+CloseButtonCorner.Parent = CloseButton
+
+CloseButton.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy() -- Closes the UI
+end)
+
+-- Create Buttons
+local ButtonNames = {
+    {"Training Points Grinder", function()
+        local success, err = pcall(function()
+            loadstring(game:HttpGet("https://pastebin.com/raw/SebEXRDB"))()
+        end)
+        if not success then
+            warn("Failed to execute loadstring: " .. err)
+        end
+    end},
+    {"Instant Finish", function()
+        local success, err = pcall(function()
+            loadstring(game:HttpGet("https://pastebin.com/raw/m45gC8wg"))()
+        end)
+        if not success then
+            warn("Failed to execute loadstring: " .. err)
+        end
+    end}
+}
+
+for i, buttonInfo in ipairs(ButtonNames) do
+    local Button = Instance.new("TextButton")
+    Button.Size = UDim2.new(0.9, 0, 0, 40)
+    Button.Position = UDim2.new(0.05, 0, 0, 40 + ((i - 1) * 50))
+    Button.Text = buttonInfo[1]
+    Button.TextColor3 = Color3.new(1, 1, 1)
+    Button.BackgroundColor3 = Color3.new(0.3, 0.3, 0.3) -- Grey background
+    Button.Font = Enum.Font.GothamBold
+    Button.TextSize = 14
+    Button.Parent = Frame
+
+    -- Add UICorner to Button
+    local ButtonCorner = Instance.new("UICorner")
+    ButtonCorner.CornerRadius = UDim.new(0, 10)
+    ButtonCorner.Parent = Button
+
+    -- Connect Button functionality (if provided)
+    if buttonInfo[2] then
+        Button.MouseButton1Click:Connect(buttonInfo[2])
+    end
+end

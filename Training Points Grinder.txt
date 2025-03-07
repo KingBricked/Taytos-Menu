@@ -1,0 +1,168 @@
+-- Create the UI
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "TrainingPointsUI"
+ScreenGui.ResetOnSpawn = false -- Prevent UI from resetting on character respawn
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(0, 300, 0, 200)
+Frame.Position = UDim2.new(0.5, -150, 0.5, -100)
+Frame.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+Frame.Active = true
+Frame.Draggable = true
+Frame.Parent = ScreenGui
+
+-- Add UICorner to Frame
+local FrameCorner = Instance.new("UICorner")
+FrameCorner.CornerRadius = UDim.new(0, 15)
+FrameCorner.Parent = Frame
+
+-- Add UIGradient to Frame
+local FrameGradient = Instance.new("UIGradient")
+FrameGradient.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(75, 0, 130)), -- Purple
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))    -- Black
+}
+FrameGradient.Parent = Frame
+
+-- Title Bar
+local TitleBar = Instance.new("TextLabel")
+TitleBar.Size = UDim2.new(1, 0, 0, 30)
+TitleBar.BackgroundTransparency = 1
+TitleBar.Text = "Tayto's Menu"
+TitleBar.TextColor3 = Color3.new(1, 1, 1)
+TitleBar.Font = Enum.Font.GothamBold
+TitleBar.TextSize = 16
+TitleBar.Parent = Frame
+
+-- Close Button
+local CloseButton = Instance.new("TextButton")
+CloseButton.Size = UDim2.new(0, 30, 0, 30)
+CloseButton.Position = UDim2.new(1, -30, 0, 0)
+CloseButton.Text = "X"
+CloseButton.TextColor3 = Color3.new(1, 1, 1)
+CloseButton.Font = Enum.Font.GothamBold
+CloseButton.BackgroundColor3 = Color3.new(0.8, 0, 0)
+CloseButton.Parent = Frame
+
+-- Add UICorner to Close Button
+local CloseButtonCorner = Instance.new("UICorner")
+CloseButtonCorner.CornerRadius = UDim.new(0, 10)
+CloseButtonCorner.Parent = CloseButton
+
+CloseButton.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy() -- Closes the UI
+end)
+
+-- Title Text for "Training Points Grinder"
+local TitleText = Instance.new("TextLabel")
+TitleText.Size = UDim2.new(1, 0, 0, 50)
+TitleText.Position = UDim2.new(0, 0, 0, 30)
+TitleText.BackgroundTransparency = 1 -- Transparent background
+TitleText.Text = "Training Points Grinder"
+TitleText.TextColor3 = Color3.new(1, 1, 1)
+TitleText.Font = Enum.Font.GothamBold
+TitleText.TextSize = 20
+TitleText.TextWrapped = true
+TitleText.Parent = Frame
+
+-- Enable Button
+local EnableButton = Instance.new("TextButton")
+EnableButton.Size = UDim2.new(0.4, 0, 0.2, 0)
+EnableButton.Position = UDim2.new(0.05, 0, 0.6, 0)
+EnableButton.Text = "Enable"
+EnableButton.TextColor3 = Color3.new(1, 1, 1)
+EnableButton.BackgroundColor3 = Color3.new(0, 0.8, 0) -- Green
+EnableButton.Font = Enum.Font.GothamBold
+EnableButton.TextSize = 20
+EnableButton.Parent = Frame
+
+local EnableCorner = Instance.new("UICorner")
+EnableCorner.CornerRadius = UDim.new(0, 10)
+EnableCorner.Parent = EnableButton
+
+-- Disable Button
+local DisableButton = Instance.new("TextButton")
+DisableButton.Size = UDim2.new(0.4, 0, 0.2, 0)
+DisableButton.Position = UDim2.new(0.55, 0, 0.6, 0)
+DisableButton.Text = "Disable"
+DisableButton.TextColor3 = Color3.new(1, 1, 1)
+DisableButton.BackgroundColor3 = Color3.new(0.8, 0, 0) -- Red
+DisableButton.Font = Enum.Font.GothamBold
+DisableButton.TextSize = 20
+DisableButton.Parent = Frame
+
+local DisableCorner = Instance.new("UICorner")
+DisableCorner.CornerRadius = UDim.new(0, 10)
+DisableCorner.Parent = DisableButton
+
+-- Teleporting Variables
+local teleporting = false
+local teleportConnection
+local awaitingConfirmation = false
+
+-- Enable Button Functionality
+EnableButton.MouseButton1Click:Connect(function()
+    local player = game.Players.LocalPlayer
+    local char = player.Character
+
+    if not awaitingConfirmation and not teleporting then
+        -- Initial teleport to the specified location
+        char:SetPrimaryPartCFrame(CFrame.new(
+            Vector3.new(-464.641602, 254.819977, 293.367981),
+            Vector3.new(-0.018149823, 2.06350688e-08, 0.999835253,
+                        2.04697859e-08, 1, -2.02668851e-08,
+                        -0.999835253, 2.00985735e-08, -0.018149823)
+        ))
+
+        -- Change button to confirm state
+        awaitingConfirmation = true
+        EnableButton.BackgroundColor3 = Color3.fromRGB(255, 140, 0) -- Orange
+        EnableButton.Text = "Begin?"
+    elseif awaitingConfirmation then
+        -- Begin teleport loop upon confirmation
+        awaitingConfirmation = false
+        teleporting = true
+        EnableButton.Text = "Running..."
+
+        -- Toggle teleportation between two locations
+        local toggle = true
+        teleportConnection = game:GetService("RunService").Heartbeat:Connect(function()
+            if toggle then
+                char:SetPrimaryPartCFrame(CFrame.new(
+                    Vector3.new(-560.651001, 241.020004, 227.311768),
+                    Vector3.new(0, 0, -1, 0, 1, 0, 1, 0, 0)
+                ))
+            else
+                char:SetPrimaryPartCFrame(CFrame.new(
+                    Vector3.new(-708.651001, 239.020081, 75.3117676),
+                    Vector3.new(-1, 0, 0, 0, 1, 0, 0, 0, -1)
+                ))
+            end
+            toggle = not toggle
+        end)
+    end
+end)
+
+-- Disable Button Functionality
+DisableButton.MouseButton1Click:Connect(function()
+    if teleportConnection then
+        teleportConnection:Disconnect()
+        teleportConnection = nil
+    end
+
+    teleporting = false
+    awaitingConfirmation = false
+
+    -- Reset Enable Button
+    EnableButton.BackgroundColor3 = Color3.new(0, 0.8, 0) -- Green
+    EnableButton.Text = "Enable"
+
+    -- Teleport to a specific location on disable
+    local player = game.Players.LocalPlayer
+    local char = player.Character
+    char:SetPrimaryPartCFrame(CFrame.new(
+        Vector3.new(-392.58374, 254.839981, 236.647614),
+        Vector3.new(0.999972582, -7.49468683e-08, 0.00740638422)
+    ))
+end)

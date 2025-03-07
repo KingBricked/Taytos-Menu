@@ -1,0 +1,223 @@
+-- Create the UI
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "VIPUI"
+screenGui.ResetOnSpawn = false -- Ensure UI persists after respawn
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Frame (Main Container)
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0.15, 0, 0.175, 0) -- Halved width and height
+frame.Position = UDim2.new(0.425, 0, 0.4, 0) -- Adjusted to center on screen
+frame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+frame.Active = true
+frame.Draggable = true
+frame.Parent = screenGui
+
+-- Add UICorner to Frame
+local frameCorner = Instance.new("UICorner")
+frameCorner.CornerRadius = UDim.new(0, 15) -- Smooth rounded corners
+frameCorner.Parent = frame
+
+-- Add UIGradient to Frame
+local frameGradient = Instance.new("UIGradient")
+frameGradient.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(75, 0, 130)), -- Purple
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))    -- Black
+}
+frameGradient.Parent = frame
+
+-- Title Bar
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0.2, 0) -- Adjusted height
+title.Position = UDim2.new(0, 0, 0, 0)
+title.Text = "VIP"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.TextScaled = true
+title.Font = Enum.Font.GothamBold
+title.BackgroundTransparency = 1
+title.Parent = frame
+
+-- Instruction Text
+local instruction = Instance.new("TextLabel")
+instruction.Size = UDim2.new(1, 0, 0.1, 0)
+instruction.Position = UDim2.new(0, 0, 0.2, 0)
+instruction.Text = "Press P to toggle menu visibility"
+instruction.TextColor3 = Color3.fromRGB(200, 200, 200)
+instruction.TextScaled = true
+instruction.Font = Enum.Font.Gotham
+instruction.BackgroundTransparency = 1
+instruction.Parent = frame
+
+-- Enable Button
+local enableButton = Instance.new("TextButton")
+enableButton.Size = UDim2.new(0.4, 0, 0.15, 0) -- Halved proportions
+enableButton.Position = UDim2.new(0.05, 0, 0.35, 0)
+enableButton.Text = "Enable"
+enableButton.TextColor3 = Color3.new(1, 1, 1)
+enableButton.TextScaled = true
+enableButton.Font = Enum.Font.GothamBold
+enableButton.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+enableButton.Parent = frame
+
+-- Add UICorner to Enable Button
+local enableCorner = Instance.new("UICorner")
+enableCorner.CornerRadius = UDim.new(0, 15)
+enableCorner.Parent = enableButton
+
+-- Disable Button
+local disableButton = Instance.new("TextButton")
+disableButton.Size = UDim2.new(0.4, 0, 0.15, 0) -- Halved proportions
+disableButton.Position = UDim2.new(0.55, 0, 0.35, 0)
+disableButton.Text = "Disable"
+disableButton.TextColor3 = Color3.new(1, 1, 1)
+disableButton.TextScaled = true
+disableButton.Font = Enum.Font.GothamBold
+disableButton.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+disableButton.Parent = frame
+
+-- Add UICorner to Disable Button
+local disableCorner = Instance.new("UICorner")
+disableCorner.CornerRadius = UDim.new(0, 15)
+disableCorner.Parent = disableButton
+
+-- Teleport to Shop Button
+local shopButton = Instance.new("TextButton")
+shopButton.Size = UDim2.new(0.8, 0, 0.15, 0) -- Halved proportions
+shopButton.Position = UDim2.new(0.1, 0, 0.55, 0)
+shopButton.Text = "Teleport to Shop"
+shopButton.TextColor3 = Color3.new(1, 1, 1)
+shopButton.TextScaled = true
+shopButton.Font = Enum.Font.GothamBold
+shopButton.BackgroundColor3 = Color3.fromRGB(0, 85, 255)
+shopButton.Parent = frame
+
+-- Add UICorner to Shop Button
+local shopCorner = Instance.new("UICorner")
+shopCorner.CornerRadius = UDim.new(0, 15)
+shopCorner.Parent = shopButton
+
+-- Close Button
+local closeButton = Instance.new("TextButton")
+closeButton.Size = UDim2.new(0.2, 0, 0.15, 0) -- Halved size for better fit
+closeButton.Position = UDim2.new(0.8, 0, 0, 0)
+closeButton.Text = "X"
+closeButton.TextColor3 = Color3.new(1, 1, 1)
+closeButton.TextScaled = true
+closeButton.Font = Enum.Font.GothamBold
+closeButton.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+closeButton.Parent = frame
+
+-- Add UICorner to Close Button
+local closeCorner = Instance.new("UICorner")
+closeCorner.CornerRadius = UDim.new(0, 15)
+closeCorner.Parent = closeButton
+
+-- Notification UI
+local notification = Instance.new("TextLabel")
+notification.Size = UDim2.new(0.6, 0, 0.05, 0)
+notification.Position = UDim2.new(0.2, 0, 0.05, 0)
+notification.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+notification.TextColor3 = Color3.fromRGB(255, 255, 255)
+notification.TextScaled = true
+notification.Font = Enum.Font.SourceSansBold
+notification.BackgroundTransparency = 0.2
+notification.Visible = false
+notification.Parent = screenGui
+
+local notificationCorner = Instance.new("UICorner")
+notificationCorner.CornerRadius = UDim.new(1, 0)
+notificationCorner.Parent = notification
+
+-- Variables for Functionality
+local runLoop = false
+local userInputService = game:GetService("UserInputService")
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+local firstPosition = CFrame.new(-492.429688, 9.5, -504.721771)
+local secondPosition = CFrame.new(-525.469604, 10.3, -550.92865)
+local shopPosition = CFrame.new(-496.877472, 10.268033, -532.713257)
+
+-- Function to teleport the player
+local function teleportTo(cframe)
+    if character and character:FindFirstChild("HumanoidRootPart") then
+        character.HumanoidRootPart.CFrame = cframe
+    end
+end
+
+-- Function to show notifications
+local function showNotification(message)
+    notification.Text = message
+    notification.Visible = true
+    task.delay(4, function() -- Hide notification after 4 seconds
+        notification.Visible = false
+    end)
+end
+
+-- Function to handle the "Enable" logic
+local function startLoop()
+    runLoop = true
+    showNotification("Auto Farm enabled!")
+    task.spawn(function()
+        while runLoop do
+            teleportTo(firstPosition) -- Teleport to Position 1
+            while runLoop do
+                local popupGui = player:WaitForChild("PlayerGui"):FindFirstChild("Gui")
+                if popupGui and popupGui:FindFirstChild("Popups") and popupGui.Popups:FindFirstChild("BackpackFull") then
+                    local backpackFull = popupGui.Popups.BackpackFull
+                    if backpackFull.Visible then
+                        teleportTo(secondPosition) -- Teleport to Position 2
+                        task.wait(0.5)
+                        teleportTo(firstPosition) -- Return to Position 1
+                    end
+                end
+                task.wait(0.1) -- Small delay
+            end
+            task.wait(30) -- Safety teleport every 30 Seconds
+            if runLoop then teleportTo(firstPosition) end
+        end
+    end)
+end
+
+-- Function to handle the "Disable" logic
+local function stopLoop()
+    runLoop = false
+    showNotification("Auto Farm disabled!")
+end
+
+-- Button Connections
+enableButton.MouseButton1Click:Connect(function()
+    startLoop() -- Start the Auto Farm logic or your desired functionality
+    enableButton.BackgroundColor3 = Color3.fromRGB(0, 100, 0) -- Dark green color
+    enableButton.Text = "Enabled" -- Change text to "Enabled"
+end)
+
+
+disableButton.MouseButton1Click:Connect(function()
+    stopLoop() -- Stop the Auto Farm loop
+    teleportTo(secondPosition) -- Teleport to Position 2
+    -- Reset Enable button to its default state
+    enableButton.BackgroundColor3 = Color3.fromRGB(0, 170, 0) -- Default green color
+    enableButton.Text = "Enable" -- Reset text to "Enable"
+end)
+
+shopButton.MouseButton1Click:Connect(function()
+    stopLoop() -- Stop the Auto Farm loop
+    teleportTo(shopPosition) -- Teleport to the shop
+    showNotification("Teleported to Shop") -- Display notification
+    -- Reset Enable button to its default state
+    enableButton.BackgroundColor3 = Color3.fromRGB(0, 170, 0) -- Default green color
+    enableButton.Text = "Enable" -- Reset text to "Enable"
+end)
+
+closeButton.MouseButton1Click:Connect(function()
+    screenGui:Destroy()
+end)
+
+-- Toggle UI visibility with "P" key
+userInputService.InputBegan:Connect(function(input, isProcessed)
+    if isProcessed then return end
+    if input.KeyCode == Enum.KeyCode.P then
+        frame.Visible = not frame.Visible
+    end
+end)
