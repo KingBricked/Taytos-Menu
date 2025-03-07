@@ -58,7 +58,7 @@ end)
 local ButtonNames = {
     {"Training Points Grinder", function()
         local success, err = pcall(function()
-            loadstring(game:HttpGet("https://pastebin.com/raw/SebEXRDB"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/KingBricked/Taytos-Menu/refs/heads/main/Training%20Points%20Grinder.txt"))()
         end)
         if not success then
             warn("Failed to execute loadstring: " .. err)
@@ -66,7 +66,7 @@ local ButtonNames = {
     end},
     {"Instant Finish", function()
         local success, err = pcall(function()
-            loadstring(game:HttpGet("https://pastebin.com/raw/m45gC8wg"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/KingBricked/Taytos-Menu/refs/heads/main/Instant%20Finish.txt"))()
         end)
         if not success then
             warn("Failed to execute loadstring: " .. err)
