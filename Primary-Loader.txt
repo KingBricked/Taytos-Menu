@@ -5,7 +5,7 @@ ScreenGui.ResetOnSpawn = false -- Prevent UI from resetting on respawn
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
 local Frame = Instance.new("Frame")
-Frame.Size = UDim2.new(0, 300, 0, 300)
+Frame.Size = UDim2.new(0, 300, 0, 150)
 Frame.Position = UDim2.new(0.5, -150, 0.5, -150)
 Frame.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
 Frame.Active = true
@@ -71,10 +71,7 @@ local ButtonNames = {
         if not success then
             warn("Failed to execute loadstring: " .. err)
         end
-    end},
-    {"Temp Placeholder", nil},
-    {"Temp Placeholder", nil},
-    {"Temp Placeholder", nil}
+    end}
 }
 
 for i, buttonInfo in ipairs(ButtonNames) do
