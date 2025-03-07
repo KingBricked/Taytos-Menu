@@ -58,7 +58,7 @@ end)
 local ButtonNames = {
     {"Flood Escape: Classic", function()
         local success, err = pcall(function()
-            loadstring(game:HttpGet("https://pastebin.com/raw/Au3AZ4Sf"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/KingBricked/Taytos-Menu/refs/heads/main/FEC-Loader.txt"))()
         end)
         if not success then
             warn("Failed to execute loadstring: " .. err)
@@ -66,7 +66,7 @@ local ButtonNames = {
     end},
     {"Treasure Hunt Simulator", function()
         local success, err = pcall(function()
-            loadstring(game:HttpGet("https://pastebin.com/raw/TWgSfgNK"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/KingBricked/Taytos-Menu/refs/heads/main/THS-Loader.txt"))()
         end)
         if not success then
             warn("Failed to execute loadstring: " .. err)
