@@ -58,7 +58,7 @@ end)
 local ButtonNames = {
     {"Starter", function()
         local success, err = pcall(function()
-            loadstring(game:HttpGet("https://pastebin.com/raw/q57Ne0ea"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/KingBricked/Taytos-Menu/refs/heads/main/Starter.txt"))()
         end)
         if not success then
             warn("Failed to execute loadstring: " .. err)
@@ -66,7 +66,7 @@ local ButtonNames = {
     end},
     {"Atlantis", function()
         local success, err = pcall(function()
-            loadstring(game:HttpGet("https://pastebin.com/raw/xEhrDAX4"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/KingBricked/Taytos-Menu/refs/heads/main/Atlantis.txt"))()
         end)
         if not success then
             warn("Failed to execute loadstring: " .. err)
@@ -74,7 +74,7 @@ local ButtonNames = {
     end},
     {"Camp", function()
         local success, err = pcall(function()
-            loadstring(game:HttpGet("https://pastebin.com/raw/TZ23SySz"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/KingBricked/Taytos-Menu/refs/heads/main/Camp.txt"))()
         end)
         if not success then
             warn("Failed to execute loadstring: " .. err)
@@ -82,7 +82,7 @@ local ButtonNames = {
     end},
     {"Candy Land", function()
         local success, err = pcall(function()
-            loadstring(game:HttpGet("https://pastebin.com/raw/PydCMs2G"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/KingBricked/Taytos-Menu/refs/heads/main/CandyLand.txt"))()
         end)
         if not success then
             warn("Failed to execute loadstring: " .. err)
@@ -90,7 +90,7 @@ local ButtonNames = {
     end},
     {"Dominus", function()
         local success, err = pcall(function()
-            loadstring(game:HttpGet("https://pastebin.com/raw/RH8UE7YA"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/KingBricked/Taytos-Menu/refs/heads/main/Dominus.txt"))()
         end)
         if not success then
             warn("Failed to execute loadstring: " .. err)
@@ -98,7 +98,7 @@ local ButtonNames = {
     end},
     {"Launch Site", function()
         local success, err = pcall(function()
-            loadstring(game:HttpGet("https://pastebin.com/raw/B9jDaALd"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/KingBricked/Taytos-Menu/refs/heads/main/LaunchSite.txt"))()
         end)
         if not success then
             warn("Failed to execute loadstring: " .. err)
@@ -106,7 +106,7 @@ local ButtonNames = {
     end},
     {"Mars", function()
         local success, err = pcall(function()
-            loadstring(game:HttpGet("https://pastebin.com/raw/yXTS9YST"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/KingBricked/Taytos-Menu/refs/heads/main/Mars.txt"))()
         end)
         if not success then
             warn("Failed to execute loadstring: " .. err)
@@ -114,7 +114,7 @@ local ButtonNames = {
     end},
     {"Medieval", function()
         local success, err = pcall(function()
-            loadstring(game:HttpGet("https://pastebin.com/raw/9nBrKPr8"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/KingBricked/Taytos-Menu/refs/heads/main/Medieval.txt"))()
         end)
         if not success then
             warn("Failed to execute loadstring: " .. err)
@@ -122,7 +122,7 @@ local ButtonNames = {
     end},
     {"Moon", function()
         local success, err = pcall(function()
-            loadstring(game:HttpGet("https://pastebin.com/raw/0rD6T9NX"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/KingBricked/Taytos-Menu/refs/heads/main/Moon.txt"))()
         end)
         if not success then
             warn("Failed to execute loadstring: " .. err)
@@ -130,7 +130,7 @@ local ButtonNames = {
     end},
     {"Pirate Isle", function()
         local success, err = pcall(function()
-            loadstring(game:HttpGet("https://pastebin.com/raw/xmHnvmBW"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/KingBricked/Taytos-Menu/refs/heads/main/PirateIsle.txt"))()
         end)
         if not success then
             warn("Failed to execute loadstring: " .. err)
@@ -138,7 +138,7 @@ local ButtonNames = {
     end},
     {"Prison", function()
         local success, err = pcall(function()
-            loadstring(game:HttpGet("https://pastebin.com/raw/LpHqn9xT"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/KingBricked/Taytos-Menu/refs/heads/main/Prison.txt"))()
         end)
         if not success then
             warn("Failed to execute loadstring: " .. err)
@@ -146,7 +146,7 @@ local ButtonNames = {
     end},
     {"Toy Land", function()
         local success, err = pcall(function()
-            loadstring(game:HttpGet("https://pastebin.com/raw/KRaSvjLi"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/KingBricked/Taytos-Menu/refs/heads/main/ToyLand.txt"))()
         end)
         if not success then
             warn("Failed to execute loadstring: " .. err)
@@ -154,7 +154,7 @@ local ButtonNames = {
     end},
     {"Volcano", function()
         local success, err = pcall(function()
-            loadstring(game:HttpGet("https://pastebin.com/raw/p4n1g3Yj"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/KingBricked/Taytos-Menu/refs/heads/main/Volcano.txt"))()
         end)
         if not success then
             warn("Failed to execute loadstring: " .. err)
@@ -162,7 +162,7 @@ local ButtonNames = {
     end},
     {"Vip", function()
         local success, err = pcall(function()
-            loadstring(game:HttpGet("https://pastebin.com/raw/air1fY7J"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/KingBricked/Taytos-Menu/refs/heads/main/VIP.txt"))()
         end)
         if not success then
             warn("Failed to execute loadstring: " .. err)
