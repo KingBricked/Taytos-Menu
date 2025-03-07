@@ -58,15 +58,15 @@ end)
 local ButtonNames = {
     {"AFK Tools", function()
         local success, err = pcall(function()
-            loadstring(game:HttpGet("https://pastebin.com/raw/1m3vhEys"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/KingBricked/Taytos-Menu/refs/heads/main/THS-AFK-Loader.txt"))()
         end)
         if not success then
             warn("Failed to execute loadstring: " .. err)
         end
     end},
     {"Chest Teleport", function()
-        local success, err = pcall(function()
-            loadstring(game:HttpGet("https://pastebin.com/raw/1m3vhEys"))()
+        local success, err = pcall(function()            
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/KingBricked/Taytos-Menu/refs/heads/main/Chest%20Teleport.txt"))()
         end)
         if not success then
             warn("Failed to execute loadstring: " .. err)
